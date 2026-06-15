@@ -333,6 +333,9 @@ export default function MyDex() {
 
 **🔗 [walletbutler-sdk.vercel.app](https://walletbutler-sdk.vercel.app)**
 
+> [!IMPORTANT]
+> The agent's Venice AI wallet currently has a limited USDC balance for x402 inference. The demo will work until the balance is consumed. **Base Mainnet is recommended** for testing — it uses real USDC and the full relayer stack. Base Sepolia is available for dry-runs but may have reduced fee estimation accuracy.
+
 The demo shows the full flow:
 1. Connect your MetaMask wallet
 2. Click **"Delegate"** to grant the agent scoped permissions
@@ -374,13 +377,6 @@ During development, we identified several areas for improvement in the tools we 
 
 ---
 
-## 🐦 Social Media
-
-Follow our hackathon journey and the future of Wallet Butler SDK:
-
-- **Twitter/X**: [@WalletButlerSDK](https://twitter.com/WalletButlerSDK) *(placeholder — update with your handle)*
-- **Demo Video**: [Watch on YouTube](#) *(add your video link)*
-- **Dev Post**: [Coming soon](#)
 
 Built with 💜 for the **MetaMask Smart Accounts Kit × 1Shot API × Venice AI Dev Cook-Off** (June 2026).
 
