@@ -16,6 +16,7 @@ const ERC20_ABI = [
   }
 ] as const;
 const USDC_BASE_SEPOLIA = "0x036CbD53842c5426634e7929541eC2318f3dCF7e" as `0x${string}`;
+const USDC_BASE_MAINNET = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913" as `0x${string}`;
 
 export async function POST(req: Request) {
   try {
@@ -48,9 +49,11 @@ export async function POST(req: Request) {
 
     let workExecutions: { target: string; value: string; data: string }[] = [];
 
+    const usdcAddress = chainId === 8453 ? USDC_BASE_MAINNET : USDC_BASE_SEPOLIA;
+
     if (intent.action === "prepare_usdc_transfer" || intent.action === "send_usdc_transaction") {
       workExecutions = [{
-        target: USDC_BASE_SEPOLIA,
+        target: usdcAddress,
         value: "0",
         data: encodeFunctionData({
           abi: ERC20_ABI,
