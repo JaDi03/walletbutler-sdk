@@ -15,6 +15,7 @@ const ERC20_ABI = [
 ] as const;
 
 const USDC_BASE_SEPOLIA = "0x036CbD53842c5426634e7929541eC2318f3dCF7e" as `0x${string}`;
+const USDC_BASE_MAINNET = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913" as `0x${string}`;
 const FEE_COLLECTOR = "0xE936e8FAf4A5655469182A49a505055B71C17604" as `0x${string}`;
 
 export async function relayerRpc<T>(relayerUrl: string, method: string, params: unknown): Promise<T> {
@@ -58,10 +59,11 @@ export async function executeVia1ShotRelayer(
   console.log(`[oneshot] Executing via 1Shot Relayer on chain ${chainId}...`);
 
   let feeAmount = 10000n; // Initial mock fee (0.01 USDC)
+  const usdcAddress = chainId === 8453 ? USDC_BASE_MAINNET : USDC_BASE_SEPOLIA;
 
   function buildFeeExecution(amount: bigint) {
     return {
-      target: USDC_BASE_SEPOLIA,
+      target: usdcAddress,
       value: "0",
       data: encodeFunctionData({
         abi: ERC20_ABI,
