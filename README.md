@@ -257,7 +257,7 @@ sequenceDiagram
 ### Prerequisites
 
 - Node.js 20+
-- MetaMask Flask (for EIP-7715 support)
+- MetaMask browser extension
 - A Venice AI wallet with USDC balance (for x402 inference)
 - A 1Shot API account (for gasless relaying)
 
