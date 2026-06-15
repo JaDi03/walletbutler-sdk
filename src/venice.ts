@@ -193,6 +193,10 @@ export async function testAgentUnderstanding(chatHistory: any[], logs: string[] 
   const webSkillContent = fs.readFileSync(webSkillPath, "utf-8");
   const rpcSkillContent = fs.readFileSync(rpcSkillPath, "utf-8");
 
+  const USDC_BASE_SEPOLIA = "0x036CbD53842c5426634e7929541eC2318f3dCF7e";
+  const USDC_BASE_MAINNET = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
+  const usdcAddress = chainId === 8453 ? USDC_BASE_MAINNET : USDC_BASE_SEPOLIA;
+
   const systemPrompt = `
 ${identityContent}
 
@@ -202,7 +206,7 @@ ${userAddress ? `The user is currently connected with wallet address: ${userAddr
 CRITICAL INSTRUCTION FOR USDC BALANCE: If the user asks for their balance, you MUST use the execute_onchain_rpc tool to hit the Venice RPC endpoint.
 Do NOT use eth_getBalance (that is for ETH). You must use 'eth_call' to read the USDC Smart Contract.
 Set 'method': 'eth_call'
-Set 'parameters': [{"to": "0x036CbD53842c5426634e7929541eC2318f3dCF7e", "data": "0x70a08231000000000000000000000000${userAddress.replace("0x", "")}"}, "latest"]
+Set 'parameters': [{"to": "${usdcAddress}", "data": "0x70a08231000000000000000000000000${userAddress?.replace("0x", "")}"}, "latest"]
 The tool will automatically parse the result into a human-readable decimal amount (e.g. "1.4328 USDC"). Simply relay this exact decimal amount to the user.` : "The user has NOT connected their wallet yet."}
 ${hasDelegation 
   ? "The user HAS DELEGATED permissions to you. If they ask to execute a transfer, you can use the appropriate tool immediately to complete their request." 
