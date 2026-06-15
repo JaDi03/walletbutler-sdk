@@ -10,7 +10,8 @@ import { randomBytes } from "crypto";
 import { base, baseSepolia } from "viem/chains";
 import { privateKeyToAccount } from "viem/accounts";
 
-const RELAYER_TARGET_ADDRESS = "0xf1ef956eff4181Ce913b664713515996858B9Ca9" as `0x${string}`;
+const RELAYER_TARGET_SEPOLIA = "0xf1ef956eff4181Ce913b664713515996858B9Ca9" as `0x${string}`;
+const RELAYER_TARGET_MAINNET = "0x26a529124f0bbf9af9d8f9f84a43efe47cf1199a" as `0x${string}`;
 const USDC_BASE_SEPOLIA = "0x036CbD53842c5426634e7929541eC2318f3dCF7e" as `0x${string}`;
 const USDC_BASE_MAINNET = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913" as `0x${string}`;
 
@@ -51,6 +52,7 @@ export async function buildRedelegationChain(
 ): Promise<any[]> {
   const chain = chainId === 8453 ? base : baseSepolia;
   const usdcAddress = chainId === 8453 ? USDC_BASE_MAINNET : USDC_BASE_SEPOLIA;
+  const relayerTarget = chainId === 8453 ? RELAYER_TARGET_MAINNET : RELAYER_TARGET_SEPOLIA;
   const rpcUrl = chainId === 8453 
     ? process.env.RPC_URL_BASE_MAINNET || "https://mainnet.base.org"
     : process.env.RPC_URL_BASE_SEPOLIA || "https://sepolia.base.org";
@@ -89,7 +91,7 @@ export async function buildRedelegationChain(
       tokenAddress: usdcAddress,
       maxAmount: exactMaxAmount
     },
-    to: RELAYER_TARGET_ADDRESS,
+    to: relayerTarget,
     from: chatAccount.address,
     parentDelegation: rootDelegation,
     environment: chatSmartAccount.environment,
