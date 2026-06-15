@@ -2,7 +2,7 @@
 
 # 🤖 Wallet Butler SDK
 
-*The one-line primitive that turns any dApp into an autonomous, zero-gas Smart Account powerhouse.*
+*The open-source reference SDK that turns any dApp into an autonomous, zero-gas Smart Account powerhouse.*
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![MetaMask](https://img.shields.io/badge/MetaMask-Smart_Accounts_Kit-F6851B?style=for-the-badge&logo=metamask&logoColor=white)](https://metamask.io/)
@@ -18,9 +18,9 @@
 
 ## 🎯 TL;DR: Why Every dApp Needs a Butler
 
-**Wallet Butler SDK** is an infrastructure primitive that instantly upgrades any wallet into a **gasless, AI-powered Smart Account**. One import. One hook. Done.
+**Wallet Butler SDK** is an open-source infrastructure reference that upgrades any wallet into a **gasless, AI-powered Smart Account**. Clone it, configure your keys, and plug the core modules directly into your dApp.
 
-We abstract the extreme complexity of **MetaMask EIP-7715** delegations, **1Shot EIP-7702** relayers, and **Venice AI** x402 authentication into a single line of code that any developer can drop into their DEX, NFT marketplace, DeFi protocol, or consumer app. Users connect their regular wallet, delegate permissions once, and from that moment on, an AI agent executes on-chain actions on their behalf — **without them ever holding a single wei of ETH for gas**.
+We abstract the extreme complexity of **MetaMask EIP-7715** delegations, **1Shot EIP-7702** relayers, and **Venice AI** x402 authentication into well-documented, composable modules that any developer can integrate into their DEX, NFT marketplace, DeFi protocol, or consumer app. Users connect their regular wallet, delegate permissions once, and from that moment on, an AI agent executes on-chain actions on their behalf — **without them ever holding a single wei of ETH for gas**.
 
 This isn't a wallet. This isn't a bot. This is the **missing middleware** that makes Web3 feel like Web2 for the next billion users.
 
@@ -59,7 +59,7 @@ Wallet Butler SDK introduces a **three-pillar architecture** that completely rei
 ## 🌟 Key Features
 
 - **Zero-Native-Token Gas Abstraction**: Users never need ETH, MATIC, or any native token. 1Shot's relayer pays network gas and extracts fees in USDC automatically.
-- **One-Line SDK Integration**: Drop `useAgenticAccount()` into any React app. Full Smart Account capabilities in 60 seconds.
+- **Composable SDK Modules**: Fork the repository and integrate `useAgenticAccount()`, `delegation.ts`, or `oneshot.ts` independently into any React or Node.js app.
 - **EIP-7715 Advanced Permissions**: Scoped, time-bound, amount-capped delegations via MetaMask's native `wallet_requestExecutionPermissions`. Users retain full control.
 - **Just-In-Time Redelegation**: Our JIT chain dynamically computes exact execution amounts and builds a cryptographically signed redelegation on every transaction.
 - **Venice AI Native Tool Calling**: llama-3.3-70b with forced tool-calling schema converts "send 5 USDC to Alice" into a structured, executable payload.
@@ -254,34 +254,51 @@ sequenceDiagram
 
 ## 📦 Quick Start
 
-### Installation
+### Prerequisites
+
+- Node.js 20+
+- MetaMask Flask (for EIP-7715 support)
+- A Venice AI wallet with USDC balance (for x402 inference)
+- A 1Shot API account (for gasless relaying)
+
+### Setup
 
 ```bash
-npm install walletbutler-sdk @metamask/smart-accounts-kit viem
+# 1. Clone the repository
+git clone https://github.com/JaDi03/walletbutler-sdk
+cd walletbutler-sdk
+
+# 2. Install dependencies
+npm install
+
+# 3. Configure your environment
+cp .env.example .env
+# Edit .env with your keys (see .env.example for all required variables)
+
+# 4. Run locally
+npm run dev
 ```
 
-### Basic Usage
+### Integration Example
+
+Once running, the core SDK modules are available for direct integration into your dApp:
 
 ```tsx
-import { useAgenticAccount } from "walletbutler-sdk/hooks";
+import { useAgenticAccount } from "./src/sdk";
 
 export default function MyDex() {
-  const { delegate, executeIntent, isDelegating, isExecuting } = useAgenticAccount({
-    chainId: 84532, // Base Sepolia (or 8453 for Base Mainnet)
+  const { delegate, executeIntent } = useAgenticAccount({
+    chainId: 8453, // Base Mainnet (recommended)
     veniceModel: "llama-3.3-70b",
   });
 
   return (
     <div>
-      <button onClick={() => delegate(50, 7)} disabled={isDelegating}>
-        {isDelegating ? "Delegating..." : "1. Grant Agent Permission (50 USDC / 7 Days)"}
+      <button onClick={() => delegate(50, 7)}>
+        Grant Agent Permission (50 USDC / 7 Days)
       </button>
-
-      <button 
-        onClick={() => executeIntent("Send 10 USDC to vitalik.eth")} 
-        disabled={isExecuting}
-      >
-        {isExecuting ? "Executing..." : "2. Let Venice + 1Shot Handle Everything"}
+      <button onClick={() => executeIntent("Send 10 USDC to vitalik.eth")}>
+        Execute via Venice + 1Shot
       </button>
     </div>
   );
@@ -348,13 +365,13 @@ The demo shows the full flow:
 ## 🏆 Why This Project Matters
 
 ### For Developers
-Building Smart Account integrations from scratch requires deep expertise in EIP-7702, EIP-7715, EIP-7710, relayer economics, and AI orchestration. Wallet Butler SDK compresses months of R&D into a single import. Any React developer can add gasless, AI-powered transactions to their dApp in under an hour.
+Building Smart Account integrations from scratch requires deep expertise in EIP-7702, EIP-7715, EIP-7710, relayer economics, and AI orchestration. Wallet Butler SDK compresses months of R&D into a reference implementation any developer can study, fork, and adapt. Clone the repository, configure your keys, and you have a working gasless transaction stack.
 
 ### For Users
 No more buying ETH. No more bridging. No more "insufficient gas" errors. Users hold USDC — a stablecoin they already understand — and the infrastructure handles the rest. This is the onboarding experience that brings the next billion users to Web3.
 
 ### For the Ecosystem
-By combining MetaMask's permission framework, 1Shot's execution layer, and Venice's cognitive engine, Wallet Butler SDK demonstrates that **the pieces are already here**. The future of agentic finance isn't a distant dream — it's a `npm install` away.
+By combining MetaMask's permission framework, 1Shot's execution layer, and Venice's cognitive engine, Wallet Butler SDK demonstrates that **the pieces are already here**. The future of agentic finance isn't a distant dream — it's a `git clone` away.
 
 ---
 

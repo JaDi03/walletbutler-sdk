@@ -1,5 +1,5 @@
 {
-  "name": "walletbutler-v1",
+  "name": "walletbutler-sdk",
   "version": "1.0.0",
   "description": "WalletButler AI Agent using Venice API with x402",
   "main": "dist/index.js",
