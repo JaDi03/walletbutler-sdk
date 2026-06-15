@@ -346,19 +346,36 @@ export default function MyDex() {
 
 ---
 
-## 🎥 Live Demo
+## 🎥 Demo Video & Execution Proof
 
+### 📺 Video Walkthrough (Silent)
+**🔗 [Watch the Demo Video on YouTube](https://www.youtube.com/watch?v=tQGaDpV8VD0)**
+
+> [!NOTE]
+> Due to time constraints, this walkthrough is silent. It focuses strictly on showing the raw, unedited integration flow: connecting a MetaMask wallet, signing the EIP-7715 execution delegation, submitting a natural language command, and successfully executing the transaction gasless on-chain.
+
+### 🌐 Live dApp
 **🔗 [walletbutler-sdk.vercel.app](https://walletbutler-sdk.vercel.app)**
 
-> [!IMPORTANT]
-> The agent's Venice AI wallet currently has a limited USDC balance for x402 inference. The demo will work until the balance is consumed. **Base Mainnet is recommended** for testing — it uses real USDC and the full relayer stack. Base Sepolia is available for dry-runs but may have reduced fee estimation accuracy.
+---
 
-The demo shows the full flow:
-1. Connect your MetaMask wallet
-2. Click **"Delegate"** to grant the agent scoped permissions
-3. Type a natural language command like *"Send 2 USDC to 0x1234..."*
-4. Watch the backend terminal show Venice AI reasoning, fee estimation, and transaction submission
-5. Receive the transaction hash via 1Shot webhook
+### ⚡ Base Mainnet Execution Proof (1Shot Relayer + ERC-7710)
+
+To prove that the integration is fully functional, we deployed and tested the SDK on **Base Mainnet**. Below is the cryptographic proof of a transaction executed via Wallet Butler's JIT redelegation pipeline:
+
+*   **Transaction Hash:** [`0x71beee69d532584b5f3d9a48af32865410559154bab14c103a7ac52fac7714b3`](https://basescan.org/tx/0x71beee69d532584b5f3d9a48af32865410559154bab14c103a7ac52fac7714b3)
+*   **Proof of Gasless USDC Payment:** 
+    *   **0.01 USDC** paid to `1shotapi.base.eth` (1Shot mainnet relayer fee).
+    *   **0.20 USDC** sent directly to the destination address.
+    *   **0.00 ETH** native gas paid by the user's wallet.
+
+![Base Mainnet Basescan Execution Proof](public/basescan_tx.PNG)
+
+*The screenshot above demonstrates the EIP-7702-upgraded account executing a MetaMask smart delegation manager call, transferring USDC fees to 1Shot and the destination amount in a single atomic transaction.*
+
+---
+
+## 🚀 How to Run the Demo App
 
 ---
 
