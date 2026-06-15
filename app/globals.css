@@ -1,0 +1,209 @@
+/* Modern Dark Theme with Orange Accents based on provided image */
+:root {
+  --bg-dark: #0f0f11;
+  --panel-bg: #1a1a1c;
+  --panel-border: rgba(255, 255, 255, 0.05);
+  --text-primary: #ffffff;
+  --text-secondary: #8e8e93;
+  --accent-orange: #ff7b00;
+  --accent-orange-hover: #ff9500;
+  --gradient-orange: linear-gradient(135deg, #ff7b00 0%, #d95a00 100%);
+  --terminal-bg: #000000;
+  --terminal-text: #00ff00;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+/* Dashboard Layout */
+.dashboard-container {
+  display: flex;
+  height: 100vh;
+  padding: 20px;
+  gap: 20px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.panel {
+  background-color: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Glassmorphism subtle effect */
+.glass {
+  background: rgba(26, 26, 28, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Left Sidebar - Decorative Stats */
+.sidebar {
+  flex: 1;
+  min-width: 300px;
+  max-width: 350px;
+}
+
+.stat-card {
+  background: var(--gradient-orange);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+/* Center - Chat Interface */
+.chat-section {
+  flex: 2;
+  position: relative;
+}
+
+.chat-history {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  padding-right: 10px;
+}
+
+.chat-bubble {
+  padding: 16px;
+  border-radius: 16px;
+  margin-bottom: 12px;
+  max-width: 85%;
+  line-height: 1.5;
+}
+
+.bubble-user {
+  background-color: rgba(255, 123, 0, 0.1);
+  border: 1px solid rgba(255, 123, 0, 0.2);
+  align-self: flex-end;
+  margin-left: auto;
+}
+
+.bubble-agent {
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--panel-border);
+}
+
+.chat-input-container {
+  display: flex;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.chat-input {
+  flex: 1;
+  background-color: #000;
+  border: 1px solid var(--panel-border);
+  color: white;
+  padding: 16px 20px;
+  border-radius: 100px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.chat-input:focus {
+  border-color: var(--accent-orange);
+}
+
+.send-btn {
+  background: var(--gradient-orange);
+  color: white;
+  border: none;
+  padding: 0 24px;
+  border-radius: 100px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.send-btn:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+.send-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Right - Terminal Logs */
+.terminal-section {
+  flex: 1;
+  min-width: 300px;
+  max-width: 400px;
+  background-color: var(--terminal-bg);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  overflow-y: auto;
+  position: relative;
+}
+
+.terminal-header {
+  color: #fff;
+  margin-bottom: 16px;
+  font-weight: bold;
+  border-bottom: 1px solid #333;
+  padding-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.terminal-header::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: var(--accent-orange);
+  border-radius: 50%;
+}
+
+.terminal-log {
+  color: var(--terminal-text);
+  margin-bottom: 8px;
+  line-height: 1.4;
+  word-break: break-all;
+}
+
+.terminal-log.system {
+  color: #888;
+}
+
+.terminal-log.error {
+  color: #ff4444;
+}
+
+.terminal-log.highlight {
+  color: var(--accent-orange);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
