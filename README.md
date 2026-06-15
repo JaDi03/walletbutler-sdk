@@ -369,7 +369,7 @@ To prove that the integration is fully functional, we deployed and tested the SD
     *   **0.20 USDC** sent directly to the destination address.
     *   **0.00 ETH** native gas paid by the user's wallet.
 
-![Base Mainnet Basescan Execution Proof](public/basescan_tx.png)
+![Base Mainnet Basescan Execution Proof](public/basescan_tx.PNG)
 
 *The screenshot above demonstrates the EIP-7702-upgraded account executing a MetaMask smart delegation manager call, transferring USDC fees to 1Shot and the destination amount in a single atomic transaction.*
 
